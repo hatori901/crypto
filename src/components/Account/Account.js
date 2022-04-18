@@ -57,6 +57,7 @@ const styles = {
         if (!isAuthenticated){
            return
         }
+        !user.attributes.email ? setEmail("") : setEmail(user.attributes.email)
         !user.attributes.emailVerified ? setIsVerified(false) : setIsVerified(true)
     },[isAuthenticated,user])
 
@@ -182,7 +183,7 @@ const styles = {
                 Disconnect Wallet
                 </Button>
             </Modal>
-            {isAuthenticated && !isVerified && (
+            {/* {isAuthenticated && !isVerified && (
                     <Modal
                     visible={!isVerified}
                     footer={null}
@@ -203,7 +204,7 @@ const styles = {
                             }}>Send Verification</Button>
                         </div>
                     </Modal>
-            )}
+            )} */}
         </>
     )
   }

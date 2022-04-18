@@ -8,6 +8,7 @@ import {
 import "antd/dist/antd.css";
 import './App.css';
 import Account from './components/Account/Account'
+import Refferal from './components/Refferal/Refferal';
 
 
 function App() {
@@ -59,7 +60,7 @@ function App() {
               <Breadcrumb.Item> </Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-              Dashboard
+              <Refferal/>
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Crypto Staking &amp; Launchpad - WEB3</Footer>
