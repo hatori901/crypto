@@ -1,4 +1,4 @@
-import { message,Button, Card, Modal } from "antd";
+import { message,Button, Card, Modal,Input } from "antd";
 import Text from "antd/lib/typography/Text";
 import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
@@ -8,7 +8,6 @@ import { connectors } from "./config";
 import { getExplorer} from "../../helpers/networks"
 import { SelectOutlined } from "@ant-design/icons";
 import { getEllipsisTxt } from "../../helpers/formatters";
-import Input from "antd/lib/input/Input";
 import Title from "antd/lib/typography/Title";
 
 
@@ -164,6 +163,22 @@ const styles = {
                     </a>
                 </div>
                 </Card>
+                {user.get("email") && (
+                    <Card
+                    style={{
+                        marginTop: "10px",
+                        borderRadius: "1rem",
+                    }}
+                    bodyStyle={{ padding: "15px" }}
+                    >
+                    <Input.Group compact>
+                        <Input style={{ width: '70%' }} defaultValue={email} />
+                        {user.attributes.emailVerified
+                        ? (<p style={{paddingBlock: "10px"}}>Verified</p>)
+                        : (<Button type="primary">Verify</Button>)}
+                    </Input.Group>
+                    </Card>
+                )}
                 <Button
                 size="large"
                 type="primary"

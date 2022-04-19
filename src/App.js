@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Layout, Menu, Breadcrumb, Typography } from 'antd';
 import {
   ContainerOutlined,
@@ -6,6 +6,8 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import "antd/dist/antd.css";
+import { useMoralis } from "react-moralis";
+import {BrowserRouter as Router, Route} from "react-router-dom"
 import './App.css';
 import Account from './components/Account/Account'
 import Refferal from './components/Refferal/Refferal';
@@ -15,15 +17,23 @@ function App() {
   const { Header, Content, Footer, Sider } = Layout;
   const { SubMenu } = Menu;
   const { Title } = Typography;
+  const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading, user } = useMoralis();
   const [collapsed,setCollapsed] = useState(false);
   const onCollapse = collapse =>{
     setCollapsed(collapse)
   }
+  useEffect(() => {
+    const connectorId = window.localStorage.getItem("connectorId");
+    if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
+      enableWeb3({ provider: connectorId });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, isWeb3Enabled]);
   return (
     <div className="App">
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <Title style={{color:"white",textAlign: "center", paddingBlock: "10px"}} level={2}>KOMM</Title>
+
           <Menu style={{
             fontSize: "18px",
             fontWeight: "bold"
@@ -60,7 +70,9 @@ function App() {
               <Breadcrumb.Item> </Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-              <Refferal/>
+              {isAuthenticated && (
+               <Refferal/> 
+              )}
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Crypto Staking &amp; Launchpad - WEB3</Footer>
