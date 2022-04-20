@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react"
-import { Input,Tooltip,Card,Button } from "antd";
+import { Input,Tooltip,Card,Button,Row,Col } from "antd";
 import { CopyOutlined } from '@ant-design/icons';
 
 import {useMoralis} from 'react-moralis'
@@ -32,22 +32,43 @@ function Refferal(){
     },[user,isAuthenticated])
 
     return (
-        <div className="site-card-border-less-wrapper">
-            <Card title="Refferal Program" bordered={false} style={{ width: 300 }}>
-            <Title level={5}>Your Id Refferal</Title>
-            {refferalId && (
-                <Input.Group compact>
-                    <Input
-                        style={{ width: 'calc(100% - 50px)' }}
-                        defaultValue={refferalId}
-                    />
-                    <Tooltip title="copy refferal ID">
-                        <Button icon={<CopyOutlined />} />
-                    </Tooltip>
-                </Input.Group>
-            )}
-            </Card>
-        </div>
+        <Row>
+            <Col xs={24} sm={24} md={12} xl={6}>
+                <div className="site-card-border-less-wrapper">
+                    <Card title="Refferal Program" bordered={false}>
+                    {refferalId && (
+                        <>
+                        <div style={{marginBlock: "10px"}}>
+                            <Title level={5}>Refferal ID</Title>
+                            <Input.Group compact>
+                                <Input
+                                    style={{ width: 'calc(100% - 50px)' }}
+                                    defaultValue={refferalId}
+                                />
+                                <Tooltip title="copy refferal ID">
+                                    <Button icon={<CopyOutlined />} />
+                                </Tooltip>
+                            </Input.Group>
+                        </div>
+                        <div style={{marginTop: "10px"}}>
+                        <Title level={5}>Refferal Link</Title>
+                        <Input.Group compact>
+                            <Input
+                                style={{ width: 'calc(100% - 50px)' }}
+                                defaultValue={`https://app.komunitas.net/refferal/${refferalId}`}
+                            />
+                            <Tooltip title="copy refferal ID">
+                                <Button icon={<CopyOutlined />} />
+                            </Tooltip>
+                        </Input.Group>
+                        </div>
+                        </>
+                    )}
+                    </Card>
+                </div>
+            </Col>
+            
+        </Row>
     )
 }
 

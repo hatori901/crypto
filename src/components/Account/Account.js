@@ -8,7 +8,7 @@ import { connectors } from "./config";
 import { getExplorer} from "../../helpers/networks"
 import { SelectOutlined } from "@ant-design/icons";
 import { getEllipsisTxt } from "../../helpers/formatters";
-import Title from "antd/lib/typography/Title";
+
 
 
 const styles = {
@@ -57,6 +57,13 @@ const styles = {
            return
         }
         !user.attributes.email ? setEmail("") : setEmail(user.attributes.email)
+        !user.attributes.emailVerified ? setIsVerified(false) : setIsVerified(true)
+    },[isAuthenticated,user])
+    useEffect(()=>{
+        if (!isAuthenticated){
+           return
+        }
+        !user.attributes.accounts ? setEmail("") : setEmail(user.attributes.email)
         !user.attributes.emailVerified ? setIsVerified(false) : setIsVerified(true)
     },[isAuthenticated,user])
 
