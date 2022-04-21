@@ -58,14 +58,9 @@ const styles = {
         if (!isAuthenticated){
            return
         }
-        !user.attributes.email ? setEmail(null) : setEmail(user.attributes.email)
         !user.attributes.emailVerified ? setIsVerified(false) : setIsVerified(true)
+        !user.attributes.email ? location("/signup") : setEmail(user.attributes.email)
     },[isAuthenticated,user])
-    useEffect(()=>{
-        if(isAuthenticated && !email){
-            location("/signup")
-        }
-    })
 
     if(!isAuthenticated || !account){
         return (

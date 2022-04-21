@@ -22,9 +22,10 @@ export default function Signup(){
         <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
             <div className="site-card-wrapper">
                 <Row gutter={16} >
-                    <Col span={8} offset={6}>
+                    <Col xs={{span: 24,offset: 0}} sm={{span: 24,offset: 0}} md={{span: 24,offset: 6}} lg={{span: 12,offset: 6}}>
                         <Card title="Setup Email" bordered={false}>
                             <Form
+                                initialValues={{email:"erwinasas"}}
                                 onFinish={onFinish}>
                                 <Form.Item
                                     label="Email"

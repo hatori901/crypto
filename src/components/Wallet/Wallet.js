@@ -42,7 +42,7 @@ const styles = {
 };
 
 export default function Wallet(){
-    const {user,isWeb3Enabled, enableWeb3,isWeb3EnableLoading,isAuthenticated,Moralis} = useMoralis();
+    const {user,isWeb3Enabled, enableWeb3,isWeb3EnableLoading,isAuthenticated} = useMoralis();
     const [isAddModal,setIsAddModal] = useState(false)
     const [address,setAddress] = useState()
     const location = useNavigate();

@@ -33,7 +33,7 @@ function Refferal(){
 
     return (
         <Row>
-            <Col xs={24} sm={24} md={12} xl={6}>
+            <Col xs={24} sm={24} md={24} xl={6}>
                 <div className="site-card-border-less-wrapper">
                     <Card title="Refferal Program" bordered={false}>
                     {refferalId && (
