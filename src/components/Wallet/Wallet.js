@@ -46,24 +46,47 @@ export default function Wallet(){
     const [isAddModal,setIsAddModal] = useState(false)
     const [address,setAddress] = useState()
     const location = useNavigate();
-    const mainAddress = {
-        key : user.get("accounts")[0],
-        name : "Main Wallet",
-        address : user.get("accounts")[0],
-    }
+    const [mainAddress,setMainAddress] = useState() 
     useEffect(()=>{
-        if(!isAuthenticated){
-            location("/")
+        if(isAuthenticated){
+            setMainAddress({
+                key : user.get("accounts")[0],
+                name : "Main Wallet",
+                address : user.get("accounts")[0],
+            })
         }
-    },[isAuthenticated,location])
-
+    })
     useEffect(()=>{
         if (!isAuthenticated){
            return
         }
-        !user.get("wallet") ? user.save("wallet",mainAddress) : setAddress([user.get("wallet")])
+
+        !user.get("wallets") ? user.save("wallets",[mainAddress]) : setAddress(user.get("wallets"))
+
         
     },[isAuthenticated,user,mainAddress])
+    useEffect(() => {
+        const connectorId = window.localStorage.getItem("connectorId");
+        if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
+          enableWeb3({ provider: connectorId });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isAuthenticated, isWeb3Enabled]);
+    const onFinish = (values) => {
+        user.set("wallets",[
+            ...address,
+            {key: values.walletAddress,
+            name: values.walletName,
+            address: values.walletAddress}
+        ])
+        user.save()
+        setIsAddModal(false)
+    }
+    const onFinishFailed = (errorInfo) => {
+        console.log(errorInfo);
+    }
+    const onView = (values) =>{
+        location(`/wallets/${values.address}`)
+    }
     const columns = [
         {
             title: "Name",
@@ -78,17 +101,13 @@ export default function Wallet(){
             title: "Action",
             dataIndex: "",
             key: "x",
-            render: ()=>{
+            render: (x)=>{
                 return (
-                    <Button>View</Button>
+                    <Button onClick={()=>onView(x)}>View</Button>
                 )
             }
         }
     ]
-    Moralis.onAccountChanged(async ([account]) =>{
-        alert("Link this address to your account?")
-        // await Moralis.link(account)
-    })
 
     return (
         <>
@@ -121,19 +140,21 @@ export default function Wallet(){
                     </div>
                     <Form
                         layout="vertical"
+                        onFinish={onFinish}
                         >
-                        <Form.Item label="Wallet Name" required tooltip={{ title: 'This is a required field', icon: <InfoCircleOutlined /> }}>
+                        <Form.Item label="Wallet Name"  name='walletName' rules={[{required: true,message: 'Please input wallet name'}]} tooltip={{ title: 'This is a required field', icon: <InfoCircleOutlined /> }}>
                             <Input placeholder="Wallet Name" />
                         </Form.Item>
                         <Form.Item
                             label="Wallet Address"
-                            required
+                            name='walletAddress'
+                            rules={[{required: true,message: 'Please input wallet address'}]}
                             tooltip={{ title: 'This is a required field', icon: <InfoCircleOutlined /> }}
                         >
-                            <Input placeholder="Your Wallet Address" />
+                            <Input placeholder="Your Wallet Address"  />
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary">Submit</Button>
+                            <Button type="primary" htmlType='submit'>Submit</Button>
                         </Form.Item>
                     </Form>
                 </div>

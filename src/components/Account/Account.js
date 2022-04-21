@@ -2,6 +2,7 @@ import { message,Button, Card, Modal,Input } from "antd";
 import Text from "antd/lib/typography/Text";
 import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
+import { useNavigate } from "react-router-dom";
 import Blockie from "../Blockie";
 import Address from "../Address/Address";
 import { connectors } from "./config";
@@ -52,20 +53,19 @@ const styles = {
     const [isAuthModalVisible,setIsAuthModalVisible] = useState(false)
     const [isVerified,setIsVerified] = useState(true)
     const [email,setEmail] = useState("")
+    const location = useNavigate()
     useEffect(()=>{
         if (!isAuthenticated){
            return
         }
-        !user.attributes.email ? setEmail("") : setEmail(user.attributes.email)
+        !user.attributes.email ? setEmail(null) : setEmail(user.attributes.email)
         !user.attributes.emailVerified ? setIsVerified(false) : setIsVerified(true)
     },[isAuthenticated,user])
     useEffect(()=>{
-        if (!isAuthenticated){
-           return
+        if(isAuthenticated && !email){
+            location("/signup")
         }
-        !user.attributes.accounts ? setEmail("") : setEmail(user.attributes.email)
-        !user.attributes.emailVerified ? setIsVerified(false) : setIsVerified(true)
-    },[isAuthenticated,user])
+    })
 
     if(!isAuthenticated || !account){
         return (
@@ -213,7 +213,7 @@ const styles = {
                     styleBody={{
                         padding:"16px"
                     }}>
-                        <Title level={4}>Verify your email address</Title>
+                        <Text>Verify your email address</Text>
                         <Input placeholder="Email Address" type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{marginBlock: "10px"}} required={true}/>
                         <div style={{textAlign:"right"}}>
                             <Button type="primary" disabled={email ? false : true} onClick={async () =>{

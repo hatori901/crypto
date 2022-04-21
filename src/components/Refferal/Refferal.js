@@ -27,7 +27,7 @@ function Refferal(){
 
     useEffect(()=>{
         if(isAuthenticated){
-            !user.attributes.refferal ? setRefferalId(generateId()) : setRefferalId(user.get("refferal"));
+            !user.attributes.refferal && user.attributes.emailVerified == true ? setRefferalId(generateId()) : setRefferalId(user.get("refferal"));
         }
     },[user,isAuthenticated])
 

@@ -1,15 +1,16 @@
 import { useState,useEffect } from 'react';
-import { Layout, Menu, Breadcrumb, Typography } from 'antd';
+import { Layout, Menu, Typography } from 'antd';
 
 import "antd/dist/antd.css";
 import { useMoralis } from "react-moralis";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,useParams } from "react-router-dom";
 import './App.css';
 import MenuItems from './components/MenuItems';
 import Dashboard from './components/Dashboard';
 import Wallet from './components/Wallet/Wallet'
+import Balance from './components/Wallet/Balance';
+import Signup from './components/Account/Signup.js';
 import Account from './components/Account/Account'
-import Refferal from './components/Refferal/Refferal';
 
 
 function App() {
@@ -56,6 +57,8 @@ function App() {
             <Routes>
               <Route path='/' element={<Dashboard/>}/>
               <Route path='/wallets' element={<Wallet/>}/>
+              <Route path='/wallets/:address' element={<Balance/>}/>
+              <Route path='/signup' element={<Signup/>}/>
             </Routes>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Crypto Staking &amp; Launchpad - WEB3</Footer>
