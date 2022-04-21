@@ -17,6 +17,7 @@ export default function Balance(){
           title: "",
           dataIndex: "logo",
           key: "logo",
+          responsive: ['md'],
           render: (logo) => (
             <img
               src={logo || "https://etherscan.io/images/main/empty-token.png"}
@@ -30,6 +31,7 @@ export default function Balance(){
           title: "Name",
           dataIndex: "name",
           key: "name",
+          responsive: ['md'],
           render: (name) => name,
         },
         {
@@ -49,6 +51,7 @@ export default function Balance(){
           title: "Address",
           dataIndex: "token_address",
           key: "token_address",
+          responsive: ['md'],
           render: (address) => getEllipsisTxt(address, 5),
         },
         {

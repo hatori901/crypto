@@ -10,7 +10,7 @@ import Title from "antd/lib/typography/Title";
 
 
 function Refferal(){
-    const { isAuthenticated, account,user } = useMoralis();
+    const { isAuthenticated,user } = useMoralis();
     const [refferalId,setRefferalId] = useState("")
 
     const generateId = ()=>{
@@ -27,7 +27,7 @@ function Refferal(){
 
     useEffect(()=>{
         if(isAuthenticated){
-            !user.attributes.refferal && user.attributes.emailVerified == true ? setRefferalId(generateId()) : setRefferalId(user.get("refferal"));
+            !user.attributes.refferal && user.attributes.emailVerified === true ? setRefferalId(generateId()) : setRefferalId(user.get("refferal"));
         }
     },[user,isAuthenticated])
 

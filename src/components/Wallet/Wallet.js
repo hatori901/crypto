@@ -97,6 +97,7 @@ export default function Wallet(){
             title: "Address",
             dataIndex: "address",
             key: "address",
+            responsive: ['md'],
         },{
             title: "Action",
             dataIndex: "",
