@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { useMoralis, useERC20Balances } from "react-moralis";
-import { Skeleton, Table,Button,Select} from "antd";
+import { Skeleton, Table,Button,Select,Popconfirm} from "antd";
 import { getEllipsisTxt } from "../../helpers/formatters";
 
 
@@ -9,9 +9,21 @@ export default function Balance(){
     let {address} = useParams()
     const { Option } = Select;
     const [chain,setChain] = useState("eth")
-    const [loading,setLoading] = useState(false)
+    const [token,setToken] = useState()
     const { data: assets } = useERC20Balances({chain: chain,address: address});
-    const { Moralis } = useMoralis();
+    const { Moralis,isAuthenticated,user } = useMoralis();
+    const clickHadle = (props) => {
+        setToken(token.filter(token => token.token_address != props))
+    }
+    useEffect(()=>{
+      user.save(chain,token)
+    },[token])
+    useEffect(()=>{
+      if(!isAuthenticated){
+        return
+      }
+      user.get(chain) ? setToken(user.get(chain)) : setToken(assets);
+    },[chain,assets])
     const columns = [
         {
           title: "",
@@ -58,17 +70,17 @@ export default function Balance(){
             title: "",
             dataIndex: "",
             key: "x",
-            render: () => {
+            render: (x) => {
                 return (
-                    <Button type="error">Hide</Button>
+                  <Popconfirm title="Sure to hide?" onConfirm={() => clickHadle(x.token_address)}>
+                    <Button>Hide</Button>
+                  </Popconfirm>
                 )
             }
         }
     ];
     const onChainChange = (value) =>{
         setChain(value)
-        setLoading(true)
-        setLoading(false)
     }
     return (
         <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
@@ -84,9 +96,8 @@ export default function Balance(){
                 <Option value="polygon">Polygon</Option>
             </Select>
         <Table
-          dataSource={assets}
+          dataSource={token}
           columns={columns}
-          loading={loading}
           rowKey={(record) => {
             return record.token_address;
           }}

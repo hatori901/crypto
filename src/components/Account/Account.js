@@ -52,15 +52,15 @@ const styles = {
     const [isModalVisible,setIsModalVisible] = useState(false)
     const [isAuthModalVisible,setIsAuthModalVisible] = useState(false)
     const [isVerified,setIsVerified] = useState(true)
-    const [email,setEmail] = useState("")
+    const [email,setEmail] = useState()
     const location = useNavigate()
     useEffect(()=>{
         if (!isAuthenticated){
            return
         }
         !user.attributes.emailVerified ? setIsVerified(false) : setIsVerified(true)
-        !user.attributes.email ? location("/signup") : setEmail(user.attributes.email)
-    },[isAuthenticated,user])
+        !user.attributes.email ? console.log("langka email") : setEmail(user.get("email"));
+    },[isAuthenticated,user,location])
 
     if(!isAuthenticated || !account){
         return (

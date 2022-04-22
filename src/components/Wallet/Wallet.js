@@ -42,35 +42,28 @@ const styles = {
 };
 
 export default function Wallet(){
-    const {user,isWeb3Enabled, enableWeb3,isWeb3EnableLoading,isAuthenticated} = useMoralis();
+    const {user,isAuthenticated} = useMoralis();
     const [isAddModal,setIsAddModal] = useState(false)
     const [address,setAddress] = useState()
     const location = useNavigate();
     const [mainAddress,setMainAddress] = useState() 
     useEffect(()=>{
-        if(isAuthenticated){
-            setMainAddress({
-                key : user.get("accounts")[0],
-                name : "Main Wallet",
-                address : user.get("accounts")[0],
-            })
+        if(!isAuthenticated){
+            return
         }
-    })
+        setMainAddress({
+            key : user.get("accounts")[0],
+            name : "Main Wallet",
+            address : user.get("accounts")[0],
+        })
+    },[isAuthenticated,user])
     useEffect(()=>{
         if (!isAuthenticated){
            return
         }
 
         !user.get("wallets") ? user.save("wallets",[mainAddress]) : setAddress(user.get("wallets"))
-
-        
     },[isAuthenticated,user,mainAddress])
-    useEffect(() => {
-        const connectorId = window.localStorage.getItem("connectorId");
-        if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
-          enableWeb3({ provider: connectorId });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isAuthenticated, isWeb3Enabled]);
     const onFinish = (values) => {
         user.set("wallets",[
             ...address,

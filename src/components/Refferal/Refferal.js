@@ -27,7 +27,7 @@ function Refferal(){
 
     useEffect(()=>{
         if(isAuthenticated){
-            !user.attributes.refferal && user.attributes.emailVerified === true ? setRefferalId(generateId()) : setRefferalId(user.get("refferal"));
+            !user.get("refferal") && user.get("emailVerified") === true ? setRefferalId(generateId()) : setRefferalId(user.get("refferal"));
         }
     },[user,isAuthenticated])
 
@@ -36,7 +36,7 @@ function Refferal(){
             <Col xs={24} sm={24} md={24} xl={6}>
                 <div className="site-card-border-less-wrapper">
                     <Card title="Refferal Program" bordered={false}>
-                    {refferalId && (
+                    {refferalId && user.attributes.emailVerified === true ? (
                         <>
                         <div style={{marginBlock: "10px"}}>
                             <Title level={5}>Refferal ID</Title>
@@ -63,6 +63,8 @@ function Refferal(){
                         </Input.Group>
                         </div>
                         </>
+                    ): (
+                        <>You must Verify your email first to get Refferal ID</>
                     )}
                     </Card>
                 </div>
