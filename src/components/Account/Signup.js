@@ -25,14 +25,15 @@ export default function Signup(){
                     <Col xs={{span: 24,offset: 0}} sm={{span: 24,offset: 0}} md={{span: 24,offset: 6}} lg={{span: 12,offset: 6}}>
                         <Card title="Setup Email" bordered={false}>
                             <Form
-                                initialValues={{email:email}}
+                                initialValues={{email: "erwinasfa"}}
                                 onFinish={onFinish}>
                                 <Form.Item
                                     label="Email"
                                     name="email"
+                                    defaultValue={email}
                                     rules={[{required: true,message: "Please input your email!"}]}
                                     >
-                                    <Input defaultValue={email}/>
+                                    <Input />
                                 </Form.Item>
                                 <Form.Item wrapperCol={{ offset:12, span: 16 }}>
                                     <Button type="primary" htmlType="submit">

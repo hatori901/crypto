@@ -3,7 +3,7 @@ import { Layout, Menu, Typography } from 'antd';
 
 import "antd/dist/antd.css";
 import { useMoralis } from "react-moralis";
-import { Routes, Route,useParams } from "react-router-dom";
+import { Routes, Route,useNavigate } from "react-router-dom";
 import './App.css';
 import MenuItems from './components/MenuItems';
 import Dashboard from './components/Dashboard';
@@ -19,6 +19,7 @@ function App() {
   const { Title } = Typography;
   const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading, user } = useMoralis();
   const [collapsed,setCollapsed] = useState(false);
+  const location = useNavigate();
   const onCollapse = collapse =>{
     setCollapsed(collapse)
   }
@@ -28,6 +29,14 @@ function App() {
       enableWeb3({ provider: connectorId });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isWeb3Enabled]);
+  useEffect(()=>{
+    if(!isAuthenticated){
+      return
+    }
+    if(!user.get("email")){
+      location("/signup")
+    }
+  })
   return (
     <div className="App">
       <Layout style={{ minHeight: '100vh' }}>

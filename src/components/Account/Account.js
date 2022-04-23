@@ -59,7 +59,7 @@ const styles = {
            return
         }
         !user.attributes.emailVerified ? setIsVerified(false) : setIsVerified(true)
-        !user.attributes.email ? console.log("langka email") : setEmail(user.get("email"));
+        !user.attributes.email ? location('/signup') : setEmail(user.get("email"));
     },[isAuthenticated,user,location])
 
     if(!isAuthenticated || !account){
