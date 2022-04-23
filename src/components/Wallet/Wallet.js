@@ -1,45 +1,9 @@
-import React, { useEffect, useMemo,useState } from 'react';
-import { Form,Table,Button, Modal,Input } from 'antd';
+import React, { useEffect,useState } from 'react';
+import { Form,Table,Button, Modal,Input, message,Popconfirm } from 'antd';
 import { useNavigate } from 'react-router-dom'
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { connectors } from "./config";
-import { getEllipsisTxt } from "../../helpers/formatters";
 import { useMoralis } from 'react-moralis';
 
-const styles = {
-    account: {
-      height: "42px",
-      padding: "0 15px",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      width: "fit-content",
-      borderRadius: "12px",
-      backgroundColor: "rgb(244, 244, 244)",
-      cursor: "pointer",
-    },
-    text: {
-      color: "#21BF96",
-    },
-    connector: {
-      alignItems: "center",
-      display: "flex",
-      flexDirection: "column",
-      height: "auto",
-      justifyContent: "center",
-      marginLeft: "auto",
-      marginRight: "auto",
-      padding: "20px 5px",
-      cursor: "pointer",
-    },
-    icon: {
-      alignSelf: "center",
-      fill: "rgb(40, 13, 95)",
-      flexShrink: "0",
-      marginBottom: "8px",
-      height: "30px",
-    },
-};
 
 export default function Wallet(){
     const {user,isAuthenticated} = useMoralis();
@@ -61,24 +25,39 @@ export default function Wallet(){
         if (!isAuthenticated){
            return
         }
-
         !user.get("wallets") ? user.save("wallets",[mainAddress]) : setAddress(user.get("wallets"))
-    },[isAuthenticated,user,mainAddress])
+    },[isAuthenticated,user])
+    useEffect(()=>{
+        if(!isAuthenticated){
+            return
+        }
+        user.save("wallets",address)
+    },[address])
     const onFinish = (values) => {
-        user.set("wallets",[
-            ...address,
-            {key: values.walletAddress,
-            name: values.walletName,
-            address: values.walletAddress}
-        ])
-        user.save()
-        setIsAddModal(false)
+        let check = user.get("wallets").some(obj => obj.address === values.walletAddress)
+        if(!check){
+            user.set("wallets",[
+                ...address,
+                {key: values.walletAddress,
+                name: values.walletName,
+                address: values.walletAddress}
+            ])
+            user.save()
+            setAddress(user.get("wallets"))
+            setIsAddModal(false)
+        }else{
+            message.info("wallet is exist")
+        }
+        
     }
     const onFinishFailed = (errorInfo) => {
         console.log(errorInfo);
     }
     const onView = (values) =>{
         location(`/wallets/${values.address}`)
+    }
+    const onDelete = (values) =>{
+        setAddress(address.filter(address => address.address !== values))
     }
     const columns = [
         {
@@ -97,7 +76,12 @@ export default function Wallet(){
             key: "x",
             render: (x)=>{
                 return (
-                    <Button onClick={()=>onView(x)}>View</Button>
+                    <>
+                    <Button style={{marginInline: "10px"}} type="primary" onClick={()=>onView(x)}>View</Button>
+                    {x.address !== user.get("accounts")[0] ? (<Popconfirm title="Sure to delete?" onConfirm={() => onDelete(x.address)}>
+                        <Button danger>Delete</Button>
+                    </Popconfirm>) : ""}
+                    </>
                 )
             }
         }
@@ -135,6 +119,7 @@ export default function Wallet(){
                     <Form
                         layout="vertical"
                         onFinish={onFinish}
+                        onFinishFailed={onFinishFailed}
                         >
                         <Form.Item label="Wallet Name"  name='walletName' rules={[{required: true,message: 'Please input wallet name'}]} tooltip={{ title: 'This is a required field', icon: <InfoCircleOutlined /> }}>
                             <Input placeholder="Wallet Name" />

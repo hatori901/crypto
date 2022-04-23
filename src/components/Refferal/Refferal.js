@@ -64,7 +64,7 @@ function Refferal(){
                         </div>
                         </>
                     ): (
-                        <>You must Verify your email first to get Refferal ID</>
+                        <>You need to verify your email to get Refferal ID</>
                     )}
                     </Card>
                 </div>
