@@ -46,7 +46,7 @@ export default function Verify(){
         emailjs.send('service_sdgrjz2','template_68tl53f',
         {
             to_name: "$KOMmunity!",
-            email: user.get("email"),
+            to_email: user.get("email"),
             message: `Verification code :${codeVerif}`
         }
         ,'FBKbcDymjHqaTj4d8')

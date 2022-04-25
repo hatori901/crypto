@@ -25,7 +25,7 @@ export default function Signup(){
         emailjs.send('service_sdgrjz2','template_68tl53f',
         {
             to_name: "$KOMmunity!",
-            email: values.email,
+            to_email: values.email,
             message: `Verification code :${codeVerif}`
         }
         ,'FBKbcDymjHqaTj4d8')
