@@ -49,12 +49,10 @@ export default function Signup(){
                     <Col xs={{span: 24,offset: 0}} sm={{span: 24,offset: 0}} md={{span: 24,offset: 6}} lg={{span: 12,offset: 6}}>
                         <Card title="Setup Email" bordered={false}>
                             <Form
-                                initialValues={{email: "erwinasfa"}}
                                 onFinish={onFinish}>
                                 <Form.Item
                                     label="Email"
                                     name="email"
-                                    defaultValue={email}
                                     rules={[{required: true,message: "Please input your email!"}]}
                                     >
                                     <Input />
