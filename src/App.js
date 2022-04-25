@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard';
 import Wallet from './components/Wallet/Wallet'
 import Balance from './components/Wallet/Balance';
 import Signup from './components/Account/Signup.js';
+import Verify from './components/Account/Verify';
 import Account from './components/Account/Account'
 
 
@@ -68,6 +69,7 @@ function App() {
               <Route path='/wallets' element={<Wallet/>}/>
               <Route path='/wallets/:address' element={<Balance/>}/>
               <Route path='/signup' element={<Signup/>}/>
+              <Route path='/verify' element={<Verify/>}/>
             </Routes>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Crypto Staking &amp; Launchpad - WEB3</Footer>

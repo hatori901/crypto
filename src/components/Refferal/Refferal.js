@@ -27,16 +27,16 @@ function Refferal(){
 
     useEffect(()=>{
         if(isAuthenticated){
-            !user.get("refferal") && user.get("emailVerified") === true ? setRefferalId(generateId()) : setRefferalId(user.get("refferal"));
+            !user.get("refferal") && user.get("verified") === true ? setRefferalId(generateId()) : setRefferalId(user.get("refferal"));
         }
     },[user,isAuthenticated])
 
     return (
         <Row>
-            <Col xs={24} sm={24} md={24} xl={6}>
+            <Col xs={24} sm={24} md={12} xl={6}>
                 <div className="site-card-border-less-wrapper">
                     <Card title="Refferal Program" bordered={false}>
-                    {refferalId && user.attributes.emailVerified === true ? (
+                    {refferalId && user.attributes.verified === true ? (
                         <>
                         <div style={{marginBlock: "10px"}}>
                             <Title level={5}>Refferal ID</Title>

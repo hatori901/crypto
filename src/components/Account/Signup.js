@@ -1,11 +1,13 @@
 import { useState,useEffect } from 'react';
-import { Card, Col, Form, Input, Row,Button } from 'antd';
+import { Card, Col, Form, Input, Row,Button, message } from 'antd';
+import emailjs from '@emailjs/browser';
 import { useMoralis } from "react-moralis";
 import { useNavigate } from 'react-router-dom';
 
 export default function Signup(){
-    const { isAuthenticated, user} = useMoralis();
+    const { isAuthenticated, user,setUserData} = useMoralis();
     const [email,setEmail] = useState()
+    const [codeVerif,setCodeVerif] = useState()
     const location = useNavigate()
     useEffect(()=>{
         if (!isAuthenticated){
@@ -13,10 +15,32 @@ export default function Signup(){
         }
         !user.attributes.email ? setEmail(null) : setEmail(user.attributes.email)
     },[isAuthenticated,user])
+    const generateCode = () =>{
+        return Math.floor(Math.random()* 899999 + 100000)
+    }
+    useEffect(()=>{
+        if(!codeVerif) setCodeVerif(generateCode())
+    },[])
     const onFinish = async (values) =>{
-        user.set("email",values.email)
-        await user.save()
-        location("/")
+        emailjs.send('service_sdgrjz2','template_68tl53f',
+        {
+            to_name: "$KOMmunity!",
+            email: values.email,
+            message: `Verification code :${codeVerif}`
+        }
+        ,'FBKbcDymjHqaTj4d8')
+        await setUserData({
+            email: values.email,
+            codeVerif: codeVerif
+        },{
+            onSuccess: (success) => {
+                location("/verify")
+            },
+            onError: (error) =>{
+                return message.info(error.message)
+            }
+        })
+        
     }
     return (
         <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>

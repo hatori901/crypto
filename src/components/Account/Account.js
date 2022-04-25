@@ -58,7 +58,7 @@ const styles = {
         if (!isAuthenticated){
            return
         }
-        !user.attributes.emailVerified ? setIsVerified(false) : setIsVerified(true)
+        !user.attributes.verifed ? setIsVerified(false) : setIsVerified(true)
         !user.attributes.email ? location('/signup') : setEmail(user.get("email"));
     },[isAuthenticated,user,location])
 
@@ -175,9 +175,12 @@ const styles = {
                     >
                     <Input.Group compact>
                         <Input style={{ width: '70%' }} defaultValue={email} />
-                        {user.attributes.emailVerified
+                        {user.attributes.verified
                         ? (<p style={{paddingBlock: "10px"}}>Verified</p>)
-                        : (<Button type="primary">Verify</Button>)}
+                        : (<Button type="primary" onClick={()=>{
+                            location("/verify")
+                            setIsModalVisible(false)
+                        }}>Verify</Button>)}
                     </Input.Group>
                     </Card>
                 )}
