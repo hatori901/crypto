@@ -44,6 +44,7 @@ function Refferal(){
                                 <Input
                                     style={{ width: 'calc(100% - 50px)' }}
                                     defaultValue={refferalId}
+                                    readOnly={true}
                                 />
                                 <Tooltip title="copy refferal ID">
                                     <Button icon={<CopyOutlined />} />
@@ -56,6 +57,7 @@ function Refferal(){
                             <Input
                                 style={{ width: 'calc(100% - 50px)' }}
                                 defaultValue={`https://app.komunitas.net/refferal/${refferalId}`}
+                                readOnly={true}
                             />
                             <Tooltip title="copy refferal link">
                                 <Button icon={<CopyOutlined />} />

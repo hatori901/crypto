@@ -6,33 +6,28 @@ import { useMoralis } from 'react-moralis';
 
 
 export default function Wallet(){
-    const {user,isAuthenticated} = useMoralis();
+    const {isAuthenticated,user,setUserData} = useMoralis();
     const [isAddModal,setIsAddModal] = useState(false)
     const [address,setAddress] = useState()
     const location = useNavigate();
-    const [mainAddress,setMainAddress] = useState() 
-    useEffect(()=>{
-        if(!isAuthenticated){
-            return
-        }
-        setMainAddress({
-            key : user.get("accounts")[0],
-            name : "Main Wallet",
-            address : user.get("accounts")[0],
-        })
-    },[isAuthenticated,user])
+    // const [mainAddress,setMainAddress] = useState()
+    const mainAddress = isAuthenticated ? {
+        key : user.get("accounts")[0],
+        name : "Main Wallet",
+        address : user.get("accounts")[0],
+        } : ""
     useEffect(()=>{
         if (!isAuthenticated){
            return
         }
-        !user.get("wallets") ? user.save("wallets",[mainAddress]) : setAddress(user.get("wallets"))
-    },[isAuthenticated,user])
-    useEffect(()=>{
-        if(!isAuthenticated){
-            return
-        }
-        user.save("wallets",address)
-    },[address])
+        !user.get("wallets") ? setUserData({wallets: [mainAddress]}) : setAddress(user.get("wallets"))
+    },[user])
+    // useEffect(()=>{
+    //     if(!isAuthenticated){
+    //         return
+    //     }
+    //     user.save("wallets",address)
+    // },[address])
     const onFinish = (values) => {
         let check = user.get("wallets").some(obj => obj.address === values.walletAddress)
         if(!check){
