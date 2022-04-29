@@ -12,7 +12,9 @@ import Balance from './components/Wallet/Balance';
 import Signup from './components/Account/Signup.js';
 import Verify from './components/Account/Verify';
 import Account from './components/Account/Account'
-
+import Login from './components/Admin/Login';
+import Home from './components/Admin/Home'
+import DetailUser from './components/Admin/DetailUser';
 
 function App() {
   const { Header, Content, Footer, Sider } = Layout;
@@ -60,16 +62,17 @@ function App() {
             </div>
           </Header>
           <Content style={{ margin: 'auto', width: "90%" }}>
-            {/* <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-              <Breadcrumb.Item> </Breadcrumb.Item>
-            </Breadcrumb> */}
             <Routes>
-              <Route path='/' element={<Dashboard/>}/>
+              <Route index path='/' element={<Dashboard/>}/>
               <Route path='/wallets' element={<Wallet/>}/>
               <Route path='/wallets/:address' element={<Balance/>}/>
               <Route path='/signup' element={<Signup/>}/>
               <Route path='/verify' element={<Verify/>}/>
+              <Route path='/admin'>
+                <Route index element={<Login/>}/>
+                <Route path='home' element={<Home/>}/>
+                <Route path='user/:username' element={<DetailUser/>}/>
+              </Route>
             </Routes>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Crypto Staking &amp; Launchpad - WEB3</Footer>
