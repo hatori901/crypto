@@ -3,7 +3,7 @@ import { Form,Table,Button, Modal,Input, message,Popconfirm } from 'antd';
 import { useNavigate } from 'react-router-dom'
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { useMoralis } from 'react-moralis';
-
+import axios from 'axios';
 
 export default function Wallet(){
     const {isAuthenticated,user,setUserData} = useMoralis();
@@ -28,21 +28,31 @@ export default function Wallet(){
     //     }
     //     user.save("wallets",address)
     // },[address])
-    const onFinish = (values) => {
-        let check = user.get("wallets").some(obj => obj.address === values.walletAddress)
-        if(!check){
-            user.set("wallets",[
-                ...address,
-                {key: values.walletAddress,
-                name: values.walletName,
-                address: values.walletAddress}
-            ])
-            user.save()
-            setAddress(user.get("wallets"))
-            setIsAddModal(false)
-        }else{
-            message.info("wallet is exist")
-        }
+    const onFinish = async (values) => {
+        await axios.get(`https://api.etherscan.io/api?module=account&action=balance&address=${values.walletAddress}&tag=latest&apikey=DDQKH2R8MS25NCAF58J4RCPA1EB79MU64V`)
+        .then((response)=>{
+            if(response.data.status == "1"){
+                let check = user.get("wallets").some(obj => obj.address === values.walletAddress)
+                if(!check){
+                    user.set("wallets",[
+                        ...address,
+                        {key: values.walletAddress,
+                        name: values.walletName,
+                        address: values.walletAddress}
+                    ])
+                    user.save()
+                    setAddress(user.get("wallets"))
+                    setIsAddModal(false)
+                }else{
+                    message.info("wallet is exist")
+                }
+            }else{
+                message.error(response.data.result);
+            }
+        }).catch((error)=>{
+            console.error(error);
+        })
+        
         
     }
     const onFinishFailed = (errorInfo) => {

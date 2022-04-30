@@ -203,28 +203,7 @@ const styles = {
                 Disconnect Wallet
                 </Button>
             </Modal>
-            {/* {isAuthenticated && !isVerified && (
-                    <Modal
-                    visible={!isVerified}
-                    footer={null}
-                    onCancel={null}
-                    styleBody={{
-                        padding:"16px"
-                    }}>
-                        <Text>Verify your email address</Text>
-                        <Input placeholder="Email Address" type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{marginBlock: "10px"}} required={true}/>
-                        <div style={{textAlign:"right"}}>
-                            <Button type="primary" disabled={email ? false : true} onClick={async () =>{
-                                if(email){
-                                    user.setEmail(email);
-                                    await user.save()
-                                }
-                                
 
-                            }}>Send Verification</Button>
-                        </div>
-                    </Modal>
-            )} */}
         </>
     )
   }

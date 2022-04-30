@@ -5,6 +5,7 @@ import {
     ContainerOutlined,
     AppstoreOutlined,
     UserOutlined,
+    UsergroupAddOutlined
   } from '@ant-design/icons';
 
 function MenuItems(){
@@ -32,6 +33,15 @@ function MenuItems(){
                 <Menu.Item key="5">IKO Deals</Menu.Item>
               </SubMenu></>
             )}
+            {localStorage.getItem('access_token')
+            ? (
+            <>
+              <Menu.Item key="users" icon={<UsergroupAddOutlined />}>
+              <NavLink to="/admin/users">Users</NavLink>
+              </Menu.Item>
+            </>)
+            : ('') 
+            }
         </Menu>
     )
 }

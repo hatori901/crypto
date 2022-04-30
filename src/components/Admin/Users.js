@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getEllipsisTxt } from "../../helpers/formatters";
 import axios from 'axios'
 
-export default function Home(){
+export default function Users(){
     const [users,setUsers] = useState()
     const location = useNavigate()
     useEffect(()=>{
@@ -46,7 +46,7 @@ export default function Home(){
             key: 'x',
             render: (x)=>{
               return (
-                <Button type="primary" onClick={()=>{location(`/admin/user/${x.username}`)}}>Details</Button>
+                <Button type="primary" onClick={()=>{location(`/admin/users/${x.username}`)}}>Details</Button>
               )
             }
           }

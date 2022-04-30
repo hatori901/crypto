@@ -1,11 +1,30 @@
-import React from "react";
-import { Row,Col,Card,Form, Input, Button, Checkbox } from 'antd';
+import React, { useEffect } from "react";
+import axios from 'axios'
+import { useNavigate } from "react-router-dom";
+import { Row,Col,Card,Form, Input, Button, Checkbox, message } from 'antd';
 export default function Login(){
-    const onFinish = (values)=>{
-        console.log(values);
-    }
-    const onFinishFailed = (error) =>{
-        console.log(error);
+    const location = useNavigate()
+
+    useEffect(()=>{
+      if(localStorage.getItem('access_token')){
+        location('/admin/home')
+      }
+    },[])
+
+    const onFinish = async (values)=>{
+        await axios.post('http://localhost:4000/user/login',{
+          username:values.username,
+          password:values.password
+        }).then((response)=>{
+          if(response.status === 200){
+            localStorage.setItem('access_token',response.data.access_token)
+            message.success("Login Success")
+            location('/admin/home')
+          }
+          
+        }).catch((error)=>{
+          message.error(error.response.data.message);
+        })
     }
     return (
         
@@ -20,7 +39,6 @@ export default function Login(){
           wrapperCol={{ span: 16 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item

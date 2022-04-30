@@ -14,6 +14,7 @@ import Verify from './components/Account/Verify';
 import Account from './components/Account/Account'
 import Login from './components/Admin/Login';
 import Home from './components/Admin/Home'
+import Users from './components/Admin/Users';
 import DetailUser from './components/Admin/DetailUser';
 
 function App() {
@@ -71,7 +72,8 @@ function App() {
               <Route path='/admin'>
                 <Route index element={<Login/>}/>
                 <Route path='home' element={<Home/>}/>
-                <Route path='user/:username' element={<DetailUser/>}/>
+                <Route path='users' element={<Users/>}/>
+                <Route path='users/:username' element={<DetailUser/>}/>
               </Route>
             </Routes>
           </Content>
