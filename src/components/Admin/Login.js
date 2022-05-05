@@ -12,12 +12,12 @@ export default function Login(){
     },[])
 
     const onFinish = async (values)=>{
-        await axios.post('http://localhost:4000/user/login',{
+        await axios.post('http://localhost:4000/auth/login',{
           username:values.username,
           password:values.password
         }).then((response)=>{
           if(response.status === 200){
-            localStorage.setItem('access_token',response.data.access_token)
+            localStorage.setItem('access_token',response.data.accessToken)
             message.success("Login Success")
             location('/admin/home')
           }

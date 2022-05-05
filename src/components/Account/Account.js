@@ -136,6 +136,7 @@ const styles = {
                 padding: "15px",
                 fontSize: "17px",
                 fontWeight: "500",
+            
                 }}
                 style={{ fontSize: "16px", fontWeight: "500" }}
                 width="400px"

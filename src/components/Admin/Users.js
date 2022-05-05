@@ -11,7 +11,11 @@ export default function Users(){
       if(!localStorage.getItem('access_token')){
         location('/admin')
       }
-      axios.get('http://localhost:4000/user')
+      axios.get('http://localhost:4000/user',{
+        headers: {
+          'x-access-token': localStorage.getItem('access_token')
+        }
+      })
       .then((response)=>{
         setUsers(response.data);
       })

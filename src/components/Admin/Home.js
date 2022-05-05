@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from "react";
-import {Button, Table} from 'antd'
+import {Card, Row,Col} from 'antd'
 import { useNavigate } from "react-router-dom";
-import { getEllipsisTxt } from "../../helpers/formatters";
 import axios from 'axios'
 
 export default function Home(){
@@ -11,56 +10,31 @@ export default function Home(){
       if(!localStorage.getItem('access_token')){
         location('/admin')
       }
-      axios.get('http://localhost:4000/user')
+      axios.get('http://localhost:4000/user',{
+        headers: {
+          'x-access-token': localStorage.getItem('access_token')
+        }
+      })
       .then((response)=>{
-        setUsers(response.data);
+        setUsers(response.data.length - 1);
       })
     },[])
 
-    const columns = [
-        {
-          title: 'Address',
-          dataIndex: 'ethAddress',
-          key: 'ethAddress',
-          render: (ethAddress) => getEllipsisTxt(ethAddress,10)
-        },
-        {
-            title: 'Refferal',
-            dataIndex: 'refferal',
-            key: 'refferal',
-          },
-          {
-            title: 'Email',
-            dataIndex: 'email',
-            key: 'email',
-          },
-          {
-            title: 'isVerified',
-            dataIndex: 'verified',
-            key: 'verified',
-            render: (verified) => verified ? "True" : "False"
-          },
-          {
-            title: 'Action',
-            dataIndex: '',
-            key: 'x',
-            render: (x)=>{
-              return (
-                <Button type="primary" onClick={()=>{location(`/admin/user/${x.username}`)}}>Details</Button>
-              )
-            }
-          }
-    ]
+  
     return (
         <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-            <Table
-              bordered
-              columns={columns}
-              dataSource={users}
-              rowKey={(record)=>{
-                return record.username
-              }}  
-            />
+            <Row>
+              <Col span={8} style={{paddingInline:"10px"}}>
+                <Card title="Users" bordered={false}>
+                  {users} Users
+                </Card>
+              </Col>
+              <Col span={8} style={{paddingInline:"10px"}}>
+                <Card title="Verified Users" bordered={false}>
+                  Users
+                </Card>
+              </Col>  
+            </Row>
         </div>
     )
 }

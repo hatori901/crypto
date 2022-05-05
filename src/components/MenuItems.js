@@ -31,14 +31,21 @@ function MenuItems(){
               <SubMenu key="sub1" icon={<UserOutlined />} title="Deals">
                 <Menu.Item key="4">IDO Deals</Menu.Item>
                 <Menu.Item key="5">IKO Deals</Menu.Item>
-              </SubMenu></>
+              </SubMenu>
+              </>
             )}
             {localStorage.getItem('access_token')
             ? (
             <>
-              <Menu.Item key="users" icon={<UsergroupAddOutlined />}>
-              <NavLink to="/admin/users">Users</NavLink>
+            <SubMenu key="admin" icon={<UserOutlined />} title="Admin">
+              <Menu.Item key="home" icon={<UsergroupAddOutlined />}>
+                <NavLink to="/admin/home">Home</NavLink>
               </Menu.Item>
+              <Menu.Item key="users" icon={<UsergroupAddOutlined />}>
+                <NavLink to="/admin/users">Users</NavLink>
+              </Menu.Item>
+            </SubMenu>
+              
             </>)
             : ('') 
             }

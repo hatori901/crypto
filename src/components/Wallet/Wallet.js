@@ -22,12 +22,12 @@ export default function Wallet(){
         }
         !user.get("wallets") ? setUserData({wallets: [mainAddress]}) : setAddress(user.get("wallets"))
     },[user])
-    // useEffect(()=>{
-    //     if(!isAuthenticated){
-    //         return
-    //     }
-    //     user.save("wallets",address)
-    // },[address])
+    useEffect(()=>{
+        if(!isAuthenticated){
+            return
+        }
+        user.save("wallets",address)
+    },[address])
     const onFinish = async (values) => {
         await axios.get(`https://api.etherscan.io/api?module=account&action=balance&address=${values.walletAddress}&tag=latest&apikey=DDQKH2R8MS25NCAF58J4RCPA1EB79MU64V`)
         .then((response)=>{
