@@ -5,6 +5,9 @@ import "antd/dist/antd.css";
 import { useMoralis } from "react-moralis";
 import { Routes, Route,useNavigate } from "react-router-dom";
 import './App.css';
+import './assets/css/main.css'
+import './assets/css/responsive.css'
+import Main from './components/Layout/Main'
 import MenuItems from './components/MenuItems';
 import Dashboard from './components/Dashboard';
 import Wallet from './components/Wallet/Wallet'
@@ -43,7 +46,23 @@ function App() {
   })
   return (
     <div className="App">
-      <Layout style={{ minHeight: '100vh' }}>
+      <Main>
+        <Routes>
+              <Route index path='/' element={<Dashboard/>}/>
+              <Route path='/wallets' element={<Wallet/>}/>
+              <Route path='/wallets/:address' element={<Balance/>}/>
+              <Route path='/signup' element={<Signup/>}/>
+              <Route path='/verify' element={<Verify/>}/>
+              <Route path='/admin'>
+                <Route index element={<Login/>}/>
+                <Route path='home' element={<Home/>}/>
+                <Route path='users' element={<Users/>}/>
+                <Route path='users/:username' element={<DetailUser/>}/>
+              </Route>
+          </Routes>
+      </Main>
+      
+      {/* <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <Title style={{color:"white",textAlign: "center", paddingBlock: "10px"}} level={2}>KOMM</Title>
         <MenuItems/>
@@ -63,23 +82,11 @@ function App() {
             </div>
           </Header>
           <Content style={{ margin: 'auto', width: "90%" }}>
-            <Routes>
-              <Route index path='/' element={<Dashboard/>}/>
-              <Route path='/wallets' element={<Wallet/>}/>
-              <Route path='/wallets/:address' element={<Balance/>}/>
-              <Route path='/signup' element={<Signup/>}/>
-              <Route path='/verify' element={<Verify/>}/>
-              <Route path='/admin'>
-                <Route index element={<Login/>}/>
-                <Route path='home' element={<Home/>}/>
-                <Route path='users' element={<Users/>}/>
-                <Route path='users/:username' element={<DetailUser/>}/>
-              </Route>
-            </Routes>
+            
           </Content>
           <Footer style={{ textAlign: 'center' }}>Crypto Staking &amp; Launchpad - WEB3</Footer>
         </Layout>
-      </Layout>
+      </Layout> */}
     </div>
   );
 }
