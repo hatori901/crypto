@@ -6,7 +6,11 @@ export default function DetailUser(){
     const {username} = useParams()
     const [wallets,setWallets] = useState()
     useEffect(()=>{
-        axios.get(`http://localhost:4000/user/${username}`)
+        axios.get(`http://localhost:4000/users/${username}`,{
+            headers: {
+              'x-access-token': localStorage.getItem('access_token')
+            }
+          })
         .then((response)=>{
             setWallets(response.data.wallets)
         })

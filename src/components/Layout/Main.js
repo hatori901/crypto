@@ -4,6 +4,7 @@ import { Layout, Drawer, Affix } from "antd";
 import Sidenav from "./Sidenav";
 import Header from "./Header";
 import Footer from "./Footer";
+import MenuItems from "../MenuItems";
 
 const { Header: AntHeader, Content, Sider } = Layout;
 
@@ -54,7 +55,7 @@ function Main({ children }) {
             }`}
             style={{ background: sidenavType }}
           >
-            <Sidenav color={sidenavColor} />
+            <MenuItems/>
           </Sider>
         </Layout>
       </Drawer>
@@ -62,7 +63,7 @@ function Main({ children }) {
         breakpoint="lg"
         collapsedWidth="0"
         onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
+          
         }}
         trigger={null}
         width={250}
@@ -72,7 +73,7 @@ function Main({ children }) {
         }`}
         style={{ background: sidenavType }}
       >
-        <Sidenav color={"#1890ff"} />
+        <MenuItems/>
       </Sider>
       <Layout>
         {fixed ? (

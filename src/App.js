@@ -9,12 +9,16 @@ import './assets/css/main.css'
 import './assets/css/responsive.css'
 import Main from './components/Layout/Main'
 import MenuItems from './components/MenuItems';
+
+// User
 import Dashboard from './components/Dashboard';
 import Wallet from './components/Wallet/Wallet'
 import Balance from './components/Wallet/Balance';
 import Signup from './components/Account/Signup.js';
 import Verify from './components/Account/Verify';
-import Account from './components/Account/Account'
+import GetReffered from './components/Refferal/GetReffered';
+
+// Admin
 import Login from './components/Admin/Login';
 import Home from './components/Admin/Home'
 import Users from './components/Admin/Users';
@@ -53,6 +57,7 @@ function App() {
               <Route path='/wallets/:address' element={<Balance/>}/>
               <Route path='/signup' element={<Signup/>}/>
               <Route path='/verify' element={<Verify/>}/>
+              <Route path='/refferal/:refferal' element={<GetReffered/>}/>
               <Route path='/admin'>
                 <Route index element={<Login/>}/>
                 <Route path='home' element={<Home/>}/>

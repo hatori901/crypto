@@ -1,5 +1,6 @@
 import { Menu, Button } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
+import MenuItems from "../MenuItems";
 
 function Sidenav({ color }) {
   const location = useNavigate();
@@ -135,22 +136,6 @@ function Sidenav({ color }) {
               {billing}
             </span>
             <span className="label">Billing</span>
-          </NavLink>
-        </Menu.Item>
-        <Menu.Item className="menu-item-header" key="5">
-          Account Pages
-        </Menu.Item>
-        <Menu.Item key="6">
-          <NavLink to="/profile">
-            <span
-              className="icon"
-              style={{
-                background: page === "profile" ? color : "",
-              }}
-            >
-              {profile}
-            </span>
-            <span className="label">Profile</span>
           </NavLink>
         </Menu.Item>
       </Menu>

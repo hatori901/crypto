@@ -54,7 +54,7 @@ export default function Login(){
             name="password"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
-            <Input.Password />
+            <Input type={'password'} />
           </Form.Item>
     
           <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>

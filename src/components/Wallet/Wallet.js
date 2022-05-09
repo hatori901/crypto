@@ -100,6 +100,7 @@ export default function Wallet(){
                 <Modal
                     visible={isAddModal}
                     footer={null}
+                    rounded={'lg'}
                     onCancel={()=>setIsAddModal(false)}
                     bodyStyle={{
                         padding: "15px",
