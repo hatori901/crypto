@@ -61,6 +61,13 @@ const styles = {
         !user.attributes.verifed ? setIsVerified(false) : setIsVerified(true)
         !user.attributes.email ? location('/signup') : setEmail(user.get("email"));
     },[isAuthenticated,user,location])
+    useEffect(()=>{
+        if(isAuthenticated){
+            if(localStorage.getItem('refferer')){
+                console.log(user.get('refferedBy'));
+            }
+        }
+    },[isAuthenticated])
 
     if(!isAuthenticated || !account){
         return (

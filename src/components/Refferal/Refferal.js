@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react"
-import { Input,Tooltip,Card,Button,Row,Col } from "antd";
+import { Input,Tooltip,Card,Button,Row,Col,message } from "antd";
 import { CopyOutlined } from '@ant-design/icons';
 
 import {useMoralis} from 'react-moralis'
@@ -24,7 +24,10 @@ function Refferal(){
         user.save();
         return result
     }
-
+    const copyButton = (text) =>{
+        navigator.clipboard.writeText(text)
+        message.info('Refferal Copied')
+    }
     useEffect(()=>{
         if(isAuthenticated){
             !user.get("refferal") && user.get("verified") === true ? setRefferalId(generateId()) : setRefferalId(user.get("refferal"));
@@ -47,7 +50,7 @@ function Refferal(){
                                     readOnly={true}
                                 />
                                 <Tooltip title="copy refferal ID">
-                                    <Button icon={<CopyOutlined />} />
+                                    <Button onClick={()=>copyButton(refferalId)} icon={<CopyOutlined />} />
                                 </Tooltip>
                             </Input.Group>
                         </div>
@@ -60,7 +63,7 @@ function Refferal(){
                                 readOnly={true}
                             />
                             <Tooltip title="copy refferal link">
-                                <Button icon={<CopyOutlined />} />
+                                <Button onClick={()=>copyButton(`https://app.komunitas.net/refferal/${refferalId}`)} icon={<CopyOutlined />} />
                             </Tooltip>
                         </Input.Group>
                         </div>
