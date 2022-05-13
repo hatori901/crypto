@@ -1,14 +1,12 @@
-import { useState,useEffect } from 'react';
-import { Layout, Menu, Typography } from 'antd';
+import { useEffect } from 'react';
 
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import { useMoralis } from "react-moralis";
 import { Routes, Route,useNavigate } from "react-router-dom";
 import './App.css';
 import './assets/css/main.css'
 import './assets/css/responsive.css'
 import Main from './components/Layout/Main'
-import MenuItems from './components/MenuItems';
 
 // User
 import Dashboard from './components/Dashboard';
@@ -25,15 +23,8 @@ import Users from './components/Admin/Users';
 import DetailUser from './components/Admin/DetailUser';
 
 function App() {
-  const { Header, Content, Footer, Sider } = Layout;
-  const { SubMenu } = Menu;
-  const { Title } = Typography;
   const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading, user } = useMoralis();
-  const [collapsed,setCollapsed] = useState(false);
   const location = useNavigate();
-  const onCollapse = collapse =>{
-    setCollapsed(collapse)
-  }
   useEffect(() => {
     const connectorId = window.localStorage.getItem("connectorId");
     if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
@@ -66,32 +57,6 @@ function App() {
               </Route>
           </Routes>
       </Main>
-      
-      {/* <Layout style={{ minHeight: '100vh' }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-        <Title style={{color:"white",textAlign: "center", paddingBlock: "10px"}} level={2}>KOMM</Title>
-        <MenuItems/>
-        </Sider>
-        <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: "15px"}}>
-            <div style={{
-              display : "flex",
-              alignItems: "center",
-              justifyContent: "space-between"
-            }}>
-              <Title level={4} style={{color: "white"}}>Dashboard</Title>
-              <>
-                <Account/>
-              </>
-              
-            </div>
-          </Header>
-          <Content style={{ margin: 'auto', width: "90%" }}>
-            
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>Crypto Staking &amp; Launchpad - WEB3</Footer>
-        </Layout>
-      </Layout> */}
     </div>
   );
 }

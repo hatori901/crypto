@@ -5,22 +5,15 @@ import { useMoralis } from "react-moralis";
 import { useNavigate } from 'react-router-dom';
 
 export default function Signup(){
-    const { isAuthenticated, user,setUserData} = useMoralis();
-    const [email,setEmail] = useState()
+    const { setUserData} = useMoralis();
     const [codeVerif,setCodeVerif] = useState()
     const location = useNavigate()
-    useEffect(()=>{
-        if (!isAuthenticated){
-           return
-        }
-        !user.attributes.email ? setEmail(null) : setEmail(user.attributes.email)
-    },[isAuthenticated,user])
     const generateCode = () =>{
         return Math.floor(Math.random()* 899999 + 100000)
     }
     useEffect(()=>{
         if(!codeVerif) setCodeVerif(generateCode())
-    },[])
+    },[codeVerif])
     const onFinish = async (values) =>{
         emailjs.send('service_sdgrjz2','template_68tl53f',
         {

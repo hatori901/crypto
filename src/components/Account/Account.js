@@ -51,14 +51,12 @@ const styles = {
     const { authenticate, isAuthenticated, account,user, chainId, logout } = useMoralis();
     const [isModalVisible,setIsModalVisible] = useState(false)
     const [isAuthModalVisible,setIsAuthModalVisible] = useState(false)
-    const [isVerified,setIsVerified] = useState(true)
     const [email,setEmail] = useState()
     const location = useNavigate()
     useEffect(()=>{
         if (!isAuthenticated){
            return
         }
-        !user.attributes.verifed ? setIsVerified(false) : setIsVerified(true)
         !user.attributes.email ? location('/signup') : setEmail(user.get("email"));
     },[isAuthenticated,user,location])
     useEffect(()=>{
@@ -67,7 +65,7 @@ const styles = {
                 console.log(user.get('refferedBy'));
             }
         }
-    },[isAuthenticated])
+    },[isAuthenticated,user])
 
     if(!isAuthenticated || !account){
         return (

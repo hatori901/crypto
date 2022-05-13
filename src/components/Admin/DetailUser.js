@@ -14,7 +14,7 @@ export default function DetailUser(){
         .then((response)=>{
             setWallets(response.data.wallets)
         })
-    },[])
+    },[username])
 
     const columns = [
         {

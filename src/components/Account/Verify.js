@@ -15,10 +15,10 @@ export default function Verify(){
     }
     useEffect(()=>{
         if(!codeVerif) setCodeVerif(generateCode())
-    },[])
+    },[codeVerif])
     const confirm = () =>{
-        if(code.length == 6){
-            if(code == user.get("codeVerif")){
+        if(code.length === 6){
+            if(code === user.get("codeVerif")){
                 setUserData({
                     codeVerif: null,
                     verified: true
