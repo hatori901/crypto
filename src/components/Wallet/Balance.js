@@ -13,17 +13,17 @@ export default function Balance(){
     const { data: assets } = useERC20Balances({chain: chain,address: address});
     const { Moralis,isAuthenticated,user } = useMoralis();
     const clickHadle = (props) => {
-        setToken(token.filter(token => token.token_address != props))
+        setToken(token.filter(token => token.token_address !== props))
     }
     useEffect(()=>{
       user.save(chain,token)
-    },[token])
+    },[token,user,chain])
     useEffect(()=>{
       if(!isAuthenticated){
         return
       }
       user.get(chain) ? setToken(user.get(chain)) : setToken(assets);
-    },[chain,assets])
+    },[isAuthenticated,user,chain,assets])
     const columns = [
         {
           title: "",

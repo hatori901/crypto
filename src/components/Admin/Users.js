@@ -19,7 +19,7 @@ export default function Users(){
       .then((response)=>{
         setUsers(response.data);
       })
-    },[])
+    },[location])
 
     const columns = [
         {

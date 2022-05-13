@@ -9,7 +9,7 @@ export default function Login(){
       if(localStorage.getItem('access_token')){
         location('/admin/home')
       }
-    },[])
+    },[location])
 
     const onFinish = async (values)=>{
         await axios.post('http://localhost:4000/auth/login',{

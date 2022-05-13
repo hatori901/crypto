@@ -21,17 +21,17 @@ export default function Wallet(){
            return
         }
         !user.get("wallets") ? setUserData({wallets: [mainAddress]}) : setAddress(user.get("wallets"))
-    },[user])
+    },[isAuthenticated,user,setUserData])
     useEffect(()=>{
         if(!isAuthenticated){
             return
         }
         user.save("wallets",address)
-    },[address])
+    },[isAuthenticated,user,address])
     const onFinish = async (values) => {
         await axios.get(`https://api.etherscan.io/api?module=account&action=balance&address=${values.walletAddress}&tag=latest&apikey=DDQKH2R8MS25NCAF58J4RCPA1EB79MU64V`)
         .then((response)=>{
-            if(response.data.status == "1"){
+            if(response.data.status === "1"){
                 let check = user.get("wallets").some(obj => obj.address === values.walletAddress)
                 if(!check){
                     user.set("wallets",[

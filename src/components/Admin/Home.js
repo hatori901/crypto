@@ -32,7 +32,7 @@ export default function Home(){
       .then((response)=>{
         setUsersVerified(response.data);
       })
-    },[])
+    },[location])
 
   
     return (

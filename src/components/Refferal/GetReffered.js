@@ -4,7 +4,7 @@ import axios from "axios";
 import {useMoralis} from 'react-moralis'
 export default function GetReffered(){
     const {refferal} = useParams()
-    const {isAuthenticated,user,setUserData} = useMoralis();
+    const {isAuthenticated,} = useMoralis();
     const location= useNavigate()
     useEffect(()=>{
         if(!isAuthenticated){
@@ -17,5 +17,5 @@ export default function GetReffered(){
             })
         }
         
-    },[isAuthenticated])
+    },[isAuthenticated,refferal,location])
 }
