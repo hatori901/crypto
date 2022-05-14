@@ -36,14 +36,10 @@ function Main({ children }) {
         visible={visible}
         key={placement === "right" ? "left" : "right"}
         width={250}
-        className={`drawer-sidebar ${
-          pathname === "rtl" ? "drawer-sidebar-rtl" : ""
-        } `}
+        className={`drawer-sidebar`}
       >
         <Layout
-          className={`layout-dashboard ${
-            pathname === "rtl" ? "layout-dashboard-rtl" : ""
-          }`}
+          className={`layout-dashboard`}
         >
           <Sider
             trigger={null}
