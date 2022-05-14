@@ -44,11 +44,10 @@ function Main({ children }) {
           <Sider
             trigger={null}
             width={250}
-            theme="light"
-            className={`sider-primary ant-layout-sider-primary ${
+            theme="dark"
+            className={`sider-primary bg-blue-700 ${
               sidenavType === "#fff" ? "active-route" : ""
             }`}
-            style={{ background: sidenavType }}
           >
             <MenuItems/>
           </Sider>
@@ -62,18 +61,17 @@ function Main({ children }) {
         }}
         trigger={null}
         width={250}
-        theme="light"
-        className={`sider-primary ant-layout-sider-primary ${
+        theme="dark"
+        className={`sider-primary bg-blue-700  ${
           sidenavType === "#fff" ? "active-route" : ""
         }`}
-        style={{ background: sidenavType }}
       >
         <MenuItems/>
       </Sider>
       <Layout>
         {fixed ? (
           <Affix>
-            <AntHeader className={`${fixed ? "ant-header-fixed" : ""}`}>
+            <AntHeader className={`${fixed ? "ant-header-fixed" : ""} bg-blue-700`}>
               <Header
                 onPress={openDrawer}
                 name={pathname}
@@ -85,7 +83,7 @@ function Main({ children }) {
             </AntHeader>
           </Affix>
         ) : (
-          <AntHeader className={`${fixed ? "ant-header-fixed" : ""}`}>
+          <AntHeader className={`${fixed ? "ant-header-fixed" : ""} bg-blue-700`}>
             <Header
               onPress={openDrawer}
               name={pathname}
