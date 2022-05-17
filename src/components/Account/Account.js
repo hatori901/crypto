@@ -182,7 +182,7 @@ const styles = {
                     <Input.Group compact>
                         <Input style={{ width: '70%' }} defaultValue={email} />
                         {user.attributes.verified
-                        ? (<p style={{paddingBlock: "10px"}}>Verified</p>)
+                        ? (<p className={'py-2 px-3 bg-green-500 text-white font-bold rounded-r-lg'}>Verified</p>)
                         : (<Button type="primary" onClick={()=>{
                             location("/verify")
                             setIsModalVisible(false)

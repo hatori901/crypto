@@ -7,9 +7,6 @@ import {
   Button,
 } from "antd";
 
-
-import { NavLink } from "react-router-dom";
-
 const toggler = [
   <svg
     width="20"
@@ -37,49 +34,49 @@ function Header({
             fontWeight: "bold"
           }} theme="light" mode="horizontal">
             <Menu.Item key="/">
-                <NavLink to="/">
+                <a href="https://kommunitas.net">
                   <span className="label">Homepage</span>
-                </NavLink>
+                </a>
             </Menu.Item>
             <Menu.Item key="/docs">
-                <NavLink to="/">
+                <a href="https://docs.kommunitas.net/">
                   <span className="label">Docs</span>
-                </NavLink>
+                </a>
             </Menu.Item>
             <Menu.Item key="/faq">
-                <NavLink to="/">
+                <a href="https://docs.kommunitas.net/faqs">
                   <span className="label">FAQ</span>
-                </NavLink>
+                </a>
             </Menu.Item>
             <Menu.Item key="/calendar">
-                <NavLink to="/">
+                <a href="https://calendar.kommunitas.net/">
                   <span className="label">Calendar</span>
-                </NavLink>
+                </a>
             </Menu.Item>
             <Menu.Item key="/bridge">
-                <NavLink to="/">
+                <a href="https://anyswap.exchange/">
                   <span className="label">Bridge</span>
-                </NavLink>
+                </a>
             </Menu.Item>
             <Menu.Item key="/crosschainswap">
-                <NavLink to="/">
+                <a href="https://defi.swft.pro/?sourceFlag=KOM&actionCode=xjijukuk2oxkwumxn2o02k5nxu#/">
                   <span className="label">Crosschain Swap</span>
-                </NavLink>
+                </a>
             </Menu.Item>
             <Menu.Item key="/staking">
-                <NavLink to="/">
+                <a href="https://staking.kommunitas.net/">
                   <span className="label">Staking</span>
-                </NavLink>
+                </a>
             </Menu.Item>
             <Menu.Item key="/launchpad">
-                <NavLink to="/">
+                <a href="https://launchpad.kommunitas.net/">
                   <span className="label">Launchpad</span>
-                </NavLink>
+                </a>
             </Menu.Item>
             <Menu.Item key="/contactus">
-                <NavLink to="/">
+                <a href="https://linktr.ee/kommunitas">
                   <span className="label">Contact Us</span>
-                </NavLink>
+                </a>
             </Menu.Item>
         </Menu>
         </Col>
