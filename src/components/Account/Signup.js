@@ -5,22 +5,15 @@ import { useMoralis } from "react-moralis";
 import { useNavigate } from 'react-router-dom';
 
 export default function Signup(){
-    const { isAuthenticated, user,setUserData} = useMoralis();
-    const [email,setEmail] = useState()
+    const { setUserData} = useMoralis();
     const [codeVerif,setCodeVerif] = useState()
     const location = useNavigate()
-    useEffect(()=>{
-        if (!isAuthenticated){
-           return
-        }
-        !user.attributes.email ? setEmail(null) : setEmail(user.attributes.email)
-    },[isAuthenticated,user])
     const generateCode = () =>{
         return Math.floor(Math.random()* 899999 + 100000)
     }
     useEffect(()=>{
         if(!codeVerif) setCodeVerif(generateCode())
-    },[])
+    },[codeVerif])
     const onFinish = async (values) =>{
         emailjs.send('service_sdgrjz2','template_68tl53f',
         {
@@ -49,11 +42,19 @@ export default function Signup(){
                     <Col xs={{span: 24,offset: 0}} sm={{span: 24,offset: 0}} md={{span: 24,offset: 6}} lg={{span: 12,offset: 6}}>
                         <Card title="Setup Email" bordered={false}>
                             <Form
+                                layout='vertical'
                                 onFinish={onFinish}>
                                 <Form.Item
                                     label="Email"
                                     name="email"
                                     rules={[{required: true,message: "Please input your email!"}]}
+                                    >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Refferal Code (Optional)"
+                                    name="refferal"
+                                    initialValue={localStorage.getItem("refferer") || ""}
                                     >
                                     <Input />
                                 </Form.Item>
