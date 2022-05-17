@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useParams,useNavigate } from "react-router-dom";
-import axios from "axios";
 import {useMoralis} from 'react-moralis'
 export default function GetReffered(){
     const {refferal} = useParams()
@@ -8,14 +7,10 @@ export default function GetReffered(){
     const location= useNavigate()
     useEffect(()=>{
         if(!isAuthenticated){
-            axios.get(`http://localhost:4000/user/refferal/${refferal}`).then((response)=>{
-            if(response.data !== null){
-                    localStorage.setItem('refferer',response.data.username)
-                }
-                location('/')
-                
-            })
+            localStorage.setItem('refferer',refferal)
+            location('/')
         }
+        location('/')
         
     },[isAuthenticated,refferal,location])
 }

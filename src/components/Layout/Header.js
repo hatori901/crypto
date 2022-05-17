@@ -3,7 +3,7 @@ import Account from '../Account/Account'
 import {
   Row,
   Col,
-  Breadcrumb,
+  Menu,
   Button,
 } from "antd";
 
@@ -31,14 +31,59 @@ function Header({
   return (
     <>
       <Row gutter={[24, 0]}>
-        <Col span={24} md={6}>
-          <Breadcrumb>
-            <Breadcrumb.Item>
-              <NavLink to="/">Dashboard</NavLink>
-            </Breadcrumb.Item>
-          </Breadcrumb>
+        <Col span={24} md={18}>
+        <Menu style={{
+            fontSize: "18px",
+            fontWeight: "bold"
+          }} theme="light" mode="horizontal">
+            <Menu.Item key="/">
+                <NavLink to="/">
+                  <span className="label">Homepage</span>
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="/docs">
+                <NavLink to="/">
+                  <span className="label">Docs</span>
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="/faq">
+                <NavLink to="/">
+                  <span className="label">FAQ</span>
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="/calendar">
+                <NavLink to="/">
+                  <span className="label">Calendar</span>
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="/bridge">
+                <NavLink to="/">
+                  <span className="label">Bridge</span>
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="/crosschainswap">
+                <NavLink to="/">
+                  <span className="label">Crosschain Swap</span>
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="/staking">
+                <NavLink to="/">
+                  <span className="label">Staking</span>
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="/launchpad">
+                <NavLink to="/">
+                  <span className="label">Launchpad</span>
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="/contactus">
+                <NavLink to="/">
+                  <span className="label">Contact Us</span>
+                </NavLink>
+            </Menu.Item>
+        </Menu>
         </Col>
-        <Col span={24} md={18} className="header-control">
+        <Col span={24} md={6} className="header-control">
           <Button
             type="link"
             className="sidebar-toggler"

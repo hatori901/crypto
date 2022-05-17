@@ -57,7 +57,7 @@ const styles = {
         if (!isAuthenticated){
            return
         }
-        !user.attributes.email ? location('/signup') : setEmail(user.get("email"));
+        !user.attributes.email ? console.log("langka email") : setEmail(user.get("email"));
     },[isAuthenticated,user,location])
     useEffect(()=>{
         if(isAuthenticated){
