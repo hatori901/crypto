@@ -14,7 +14,7 @@ function MenuItems(){
     const {isAuthenticated} = useMoralis();
     return (
         <>
-        <div style={{fontSize: "30px",fontWeight: "bold"}}>
+        <div className="text-white text-3xl font-bold">
           <span>Kommunitas</span>
         </div>
         <hr/>

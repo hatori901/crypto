@@ -138,13 +138,14 @@ body {
     .active,
   .layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu .active {
     background-color: #fff;
+    color:rgba(0, 0, 0, 0.65);
     box-shadow: 0 20px 27px rgb(0 0 0 / 5%);
     font-weight: 600;
   }
   .layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item a,
   .layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu a {
     padding: 10px 16px;
-    color: #141414;
+    color: #fff;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -229,7 +230,7 @@ body {
   
   .layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item a:hover,
   .layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu a:hover {
-    color: #141414;
+    color: #ddd;
   }
   
   .layout-dashboard
