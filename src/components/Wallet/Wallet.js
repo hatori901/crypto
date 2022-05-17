@@ -10,7 +10,6 @@ export default function Wallet(){
     const [isAddModal,setIsAddModal] = useState(false)
     const [address,setAddress] = useState()
     const location = useNavigate();
-    // const [mainAddress,setMainAddress] = useState()
     const mainAddress = isAuthenticated ? {
         key : user.get("accounts")[0],
         name : "Main Wallet",
