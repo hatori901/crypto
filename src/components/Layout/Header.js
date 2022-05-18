@@ -3,12 +3,9 @@ import Account from '../Account/Account'
 import {
   Row,
   Col,
-  Breadcrumb,
+  Menu,
   Button,
 } from "antd";
-
-
-import { NavLink } from "react-router-dom";
 
 const toggler = [
   <svg
@@ -31,14 +28,59 @@ function Header({
   return (
     <>
       <Row gutter={[24, 0]}>
-        <Col span={24} md={6}>
-          <Breadcrumb>
-            <Breadcrumb.Item>
-              <NavLink to="/">Dashboard</NavLink>
-            </Breadcrumb.Item>
-          </Breadcrumb>
+        <Col span={24} md={18}>
+        <Menu style={{
+            fontSize: "18px",
+            fontWeight: "bold"
+          }} theme="light" mode="horizontal">
+            <Menu.Item key="/">
+                <a href="https://kommunitas.net">
+                  <span className="label">Homepage</span>
+                </a>
+            </Menu.Item>
+            <Menu.Item key="/docs">
+                <a href="https://docs.kommunitas.net/">
+                  <span className="label">Docs</span>
+                </a>
+            </Menu.Item>
+            <Menu.Item key="/faq">
+                <a href="https://docs.kommunitas.net/faqs">
+                  <span className="label">FAQ</span>
+                </a>
+            </Menu.Item>
+            <Menu.Item key="/calendar">
+                <a href="https://calendar.kommunitas.net/">
+                  <span className="label">Calendar</span>
+                </a>
+            </Menu.Item>
+            <Menu.Item key="/bridge">
+                <a href="https://anyswap.exchange/">
+                  <span className="label">Bridge</span>
+                </a>
+            </Menu.Item>
+            <Menu.Item key="/crosschainswap">
+                <a href="https://defi.swft.pro/?sourceFlag=KOM&actionCode=xjijukuk2oxkwumxn2o02k5nxu#/">
+                  <span className="label">Crosschain Swap</span>
+                </a>
+            </Menu.Item>
+            <Menu.Item key="/staking">
+                <a href="https://staking.kommunitas.net/">
+                  <span className="label">Staking</span>
+                </a>
+            </Menu.Item>
+            <Menu.Item key="/launchpad">
+                <a href="https://launchpad.kommunitas.net/">
+                  <span className="label">Launchpad</span>
+                </a>
+            </Menu.Item>
+            <Menu.Item key="/contactus">
+                <a href="https://linktr.ee/kommunitas">
+                  <span className="label">Contact Us</span>
+                </a>
+            </Menu.Item>
+        </Menu>
         </Col>
-        <Col span={24} md={18} className="header-control">
+        <Col span={24} md={6} className="header-control">
           <Button
             type="link"
             className="sidebar-toggler"

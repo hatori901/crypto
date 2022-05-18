@@ -10,15 +10,16 @@ export default function Wallet(){
     const [isAddModal,setIsAddModal] = useState(false)
     const [address,setAddress] = useState()
     const location = useNavigate();
-    const mainAddress = isAuthenticated ? {
-        key : user.get("accounts")[0],
-        name : "Main Wallet",
-        address : user.get("accounts")[0],
-        } : ""
+    
     useEffect(()=>{
         if (!isAuthenticated){
            return
         }
+        const mainAddress = isAuthenticated ? {
+            key : user.get("accounts")[0],
+            name : "Main Wallet",
+            address : user.get("accounts")[0],
+        } : ""
         !user.get("wallets") ? setUserData({wallets: [mainAddress]}) : setAddress(user.get("wallets"))
     },[isAuthenticated,user,setUserData])
     useEffect(()=>{

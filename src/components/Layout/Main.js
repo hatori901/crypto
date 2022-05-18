@@ -9,18 +9,14 @@ const { Header: AntHeader, Content, Sider } = Layout;
 
 function Main({ children }) {
   const [visible, setVisible] = useState(false);
-  const [placement, setPlacement] = useState("right");
-  const [sidenavColor, setSidenavColor] = useState("#1890ff");
   const [sidenavType, setSidenavType] = useState("transparent");
   const [fixed, setFixed] = useState(false);
 
   const openDrawer = () => setVisible(!visible);
   const handleSidenavType = (type) => setSidenavType(type);
-  const handleSidenavColor = (color) => setSidenavColor(color);
   const handleFixedNavbar = (type) => setFixed(type);
 
   let { pathname } = useNavigate();
-//   pathname = pathname.replace("/", "");
 
   return (
     <Layout
@@ -30,11 +26,11 @@ function Main({ children }) {
     >
       <Drawer
         title={false}
-        placement={placement === "right" ? "left" : "right"}
+        placement={"left"}
         closable={false}
         onClose={() => setVisible(false)}
         visible={visible}
-        key={placement === "right" ? "left" : "right"}
+        key={"left"}
         width={250}
         className={`drawer-sidebar`}
       >
@@ -76,7 +72,6 @@ function Main({ children }) {
                 onPress={openDrawer}
                 name={pathname}
                 subName={pathname}
-                handleSidenavColor={handleSidenavColor}
                 handleSidenavType={handleSidenavType}
                 handleFixedNavbar={handleFixedNavbar}
               />
@@ -88,7 +83,6 @@ function Main({ children }) {
               onPress={openDrawer}
               name={pathname}
               subName={pathname}
-              handleSidenavColor={handleSidenavColor}
               handleSidenavType={handleSidenavType}
               handleFixedNavbar={handleFixedNavbar}
             />

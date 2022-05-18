@@ -18,7 +18,7 @@ export default function Verify(){
     },[codeVerif])
     const confirm = () =>{
         if(code.length === 6){
-            if(code === user.get("codeVerif")){
+            if(code == user.get("codeVerif")){
                 setUserData({
                     codeVerif: null,
                     verified: true
