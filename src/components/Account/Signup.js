@@ -42,11 +42,19 @@ export default function Signup(){
                     <Col xs={{span: 24,offset: 0}} sm={{span: 24,offset: 0}} md={{span: 24,offset: 6}} lg={{span: 12,offset: 6}}>
                         <Card title="Setup Email" bordered={false}>
                             <Form
+                                layout='vertical'
                                 onFinish={onFinish}>
                                 <Form.Item
                                     label="Email"
                                     name="email"
                                     rules={[{required: true,message: "Please input your email!"}]}
+                                    >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Refferal Code (Optional)"
+                                    name="refferal"
+                                    initialValue={localStorage.getItem("refferer") || ""}
                                     >
                                     <Input />
                                 </Form.Item>
