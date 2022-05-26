@@ -10,24 +10,23 @@ export default function Wallet(){
     const [isAddModal,setIsAddModal] = useState(false)
     const [address,setAddress] = useState()
     const location = useNavigate();
-    
+    const mainAddress = isAuthenticated ? {
+        key : user.get("accounts")[0],
+        name : "Main Wallet",
+        address : user.get("accounts")[0],
+    } : ""
     useEffect(()=>{
         if (!isAuthenticated){
            return
         }
-        const mainAddress = isAuthenticated ? {
-            key : user.get("accounts")[0],
-            name : "Main Wallet",
-            address : user.get("accounts")[0],
-        } : ""
-        !user.get("wallets") ? setUserData({wallets: [mainAddress]}) : setAddress(user.get("wallets"))
-    },[isAuthenticated,user,setUserData])
-    useEffect(()=>{
-        if(!isAuthenticated){
-            return
-        }
-        user.save("wallets",address)
-    },[isAuthenticated,user,address])
+        !user.get("wallets") ? setUserData({wallets : [mainAddress]}) : setAddress(user.get("wallets"))
+    },[isAuthenticated,user])
+    // useEffect(()=>{
+    //     if(!isAuthenticated){
+    //         return
+    //     }
+    //     if(address) user.save("wallets",address) 
+    // },[isAuthenticated,user,address])
     const onFinish = async (values) => {
         await axios.get(`https://api.etherscan.io/api?module=account&action=balance&address=${values.walletAddress}&tag=latest&apikey=DDQKH2R8MS25NCAF58J4RCPA1EB79MU64V`)
         .then((response)=>{

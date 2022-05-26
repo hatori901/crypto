@@ -1,5 +1,5 @@
 import React from 'react';
-import Refferal from './Refferal/Refferal';
+import Refferal from '../routes/Refferal/Refferal';
 import { useMoralis } from "react-moralis";
 
 export default function Dashboard(){

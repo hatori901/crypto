@@ -44,6 +44,16 @@ function MenuItems(){
                   <span className="label">Wallets</span>
                 </NavLink>
               </Menu.Item>
+              <Menu.Item key="refferals">
+                <NavLink to="/refferals">
+                  <span
+                    className="icon"
+                  >
+                    <ContainerOutlined />
+                  </span>
+                  <span className="label">Refferals</span>
+                </NavLink>
+              </Menu.Item>
               </>
             )}
             {localStorage.getItem('access_token')

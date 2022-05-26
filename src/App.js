@@ -14,13 +14,14 @@ import Wallet from './components/Wallet/Wallet'
 import Balance from './components/Wallet/Balance';
 import Signup from './components/Account/Signup.js';
 import Verify from './components/Account/Verify';
-import GetReffered from './components/Refferal/GetReffered';
+import RefferalPage from './routes/Refferal/RefferalPage';
+import GetReffered from './routes/Refferal/GetReffered';
 
 // Admin
-import Login from './components/Admin/Login';
-import Home from './components/Admin/Home'
-import Users from './components/Admin/Users';
-import DetailUser from './components/Admin/DetailUser';
+import Login from './routes/Admin/Login';
+import Home from './routes/Admin/Home'
+import Users from './routes/Admin/Users';
+import DetailUser from './routes/Admin/DetailUser';
 
 function App() {
   const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading, user } = useMoralis();
@@ -49,6 +50,9 @@ function App() {
               <Route path='/signup' element={<Signup/>}/>
               <Route path='/verify' element={<Verify/>}/>
               <Route path='/refferal/:refferal' element={<GetReffered/>}/>
+              <Route path='/refferals'>
+                <Route index element={<RefferalPage/>}/>
+              </Route>
               <Route path='/admin'>
                 <Route index element={<Login/>}/>
                 <Route path='home' element={<Home/>}/>
