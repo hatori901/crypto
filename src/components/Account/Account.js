@@ -52,21 +52,26 @@ const styles = {
     const [isModalVisible,setIsModalVisible] = useState(false)
     const [isAuthModalVisible,setIsAuthModalVisible] = useState(false)
     const [email,setEmail] = useState()
+    const [refferalId,setRefferalId] = useState("")
     const location = useNavigate()
+    const generateId = ()=>{
+        var result = ''
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+        var charaLength = characters.length
+        for(var i = 0; i <= 8;i++){
+            result += characters.charAt(Math.floor(Math.random() * charaLength))
+        }
+        user.set("refferal", result)
+        user.save();
+        return result
+    }
     useEffect(()=>{
         if (!isAuthenticated){
            return
         }
-        !user.attributes.email ? console.log("langka email") : setEmail(user.get("email"));
+        !user.attributes.email ? location("/signup") : setEmail(user.get("email"));
+        !user.get("refferal") && user.get("verified") === true ? setRefferalId(generateId()) : setRefferalId(user.get("refferal"));
     },[isAuthenticated,user,location])
-    useEffect(()=>{
-        if(isAuthenticated){
-            if(localStorage.getItem('refferer')){
-                console.log(user.get('refferedBy'));
-            }
-        }
-    },[isAuthenticated,user])
-
     if(!isAuthenticated || !account){
         return (
             <>
